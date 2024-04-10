@@ -2,92 +2,6 @@
 #include <stdlib.h> 
 #include <string.h>
 
-#define MAX_CONTATOS 100
-
-typedef struct { 
-    char nome[50]; 
-    char telefone[15]; 
-    char email[50]; 
-    char descricao[100]; 
-} Contato;
-
-// Função para salvar contatos em um arquivo
-void salvarContatos(Contato contatos[], int numContatos, const char *nomeArquivo) { 
-    FILE *arquivo = fopen(nomeArquivo, "w");  // Abre o arquivo para escrita
-    if (arquivo == NULL) {  // Verifica se o arquivo foi aberto corretamente
-        printf("Erro ao abrir o arquivo.\n"); 
-        exit(1);  // Encerra o programa em caso de erro
-    }
-
-    // Escreve os contatos no arquivo
-    for (int i = 0; i < numContatos; i++) { 
-        fprintf(arquivo,"Nome: %s\nTelefone: %s\nEmail: %s\nDescrição: %s\n--------------\n", contatos[i].nome, contatos[i].telefone, contatos[i].email,contatos[i].descricao); 
-    }
-
-    fclose(arquivo);  // Fecha o arquivo
-}
-
-// Função para carregar contatos de um arquivo
-void carregarContatos(Contato contatos[], int *numContatos, const char *nomeArquivo) { 
-    FILE *arquivo = fopen(nomeArquivo, "r");  // Abre o arquivo para leitura
-    if (arquivo == NULL) {  // Verifica se o arquivo foi aberto corretamente
-        printf("Erro ao abrir o arquivo.\n"); 
-        exit(1);  // Encerra o programa em caso de erro
-    }
-
-    *numContatos = 0;  // Zera o contador de contatos
-
-    // Lê os contatos do arquivo
-    while (fscanf(arquivo, "%[^;];%[^;];%[^;];%[^\n]\n", contatos[*numContatos].nome, contatos[*numContatos].telefone, contatos[*numContatos].email, contatos[*numContatos].descricao) != EOF) { 
-        (*numContatos)++; 
-    }
-
-    fclose(arquivo);  // Fecha o arquivo
-}
-
-// Função principal
-int main() { 
-    Contato contatos[MAX_CONTATOS]; 
-    char nomeArquivo[50]; 
-    int opcao, numContatos = 0;
-
-    // Loop principal do programa
-    while (1) { 
-        printf("\nSelecione uma opção:\n"); 
-        printf("1 - Adicionar contato\n"); 
-        printf("2 - Listar contatos\n"); 
-        printf("3 - Salvar contatos em um arquivo\n"); 
-        printf("4 - Carregar contatos de um arquivo\n"); 
-        printf("5 - Sair\n"); 
-        scanf("%d", &opcao);  // Lê a opção escolhida pelo usuário
-
-        switch (opcao) { 
-            case 1:
-                // Adicionar contato
-                if (numContatos >= MAX_CONTATOS) { 
-                    printf("Limite máximo de contatos atingido.\n"); 
-                    break; 
-                }
-
-                printf("\nDigite o nome: "); 
-                scanf(" %[^\n]s", contatos[numContatos].nome);
-
-                printf("Digite o telefone: "); 
-                scanf(" %[^\n]s", contatos[numContatos].telefone);
-
-                printf("Digite o email: "); 
-                scanf(" %[^\n]s", contatos[numContatos].email);
-
-                printf("Digite a descrição: "); 
-                scanf(" %[^\n]s", contatos[numContatos].descricao);
-
-                numContatos++; 
-                break;
-
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <string.h>
-
 #define max_contatos 100
 
 typedef struct { 
@@ -190,6 +104,7 @@ int main() {
 
                 // reseta o contador de contatos
                 numcontatos = 0;
+              memset(contatos, 0, sizeof(contatos));
                 break;
 
             case 4:
